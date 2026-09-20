@@ -1,67 +1,61 @@
-public class Electronics extends Product2 {
+public class Apparel extends Product2 {
     private String mName;
-    private int mWarrantyDuration;
-    private float mAnnualWarrantyCharge;
-    
-    
-    public Electronics() {
+    private float mDiscountPercentage;
+
+
+      public Apparel() {
         super();
         mName = "Default";
-        mWarrantyDuration = 1;
-        mAnnualWarrantyCharge = 0.0f;
+        mDiscountPercentage = 0.0f;
         mProductId = 12345;
         mManufactureId = 0123;
         mWholeSalePrice = 25.99f;
         mMarkup = .30f;
     }
-    public Electronics(String name, int warrantyDuration, float annualWarrantyCharge, int productId, int manufactureId, float wholeSalePrice, float markup) {
+     public Apparel(String name, float discountPercentage, int productId, int manufactureId, float wholeSalePrice, float markup) {
         super(productId, manufactureId, wholeSalePrice, markup);
         mName = name;
-        mWarrantyDuration = warrantyDuration;
-        mAnnualWarrantyCharge = annualWarrantyCharge;
+        mDiscountPercentage = discountPercentage;
         mProductId = productId;
         mManufactureId = manufactureId;
         mWholeSalePrice = wholeSalePrice;
         mMarkup = markup;
     }
-    public void setElectronics(String name, int warrantyDuration, float annualWarrantyCharge, int productId, int manufactureId, float wholeSalePrice, float markup) {
+        public void setApparel(String name, float discountPercentage, int productId, int manufactureId, float wholeSalePrice, float markup) {
         mName = name;
-        mWarrantyDuration = warrantyDuration;
-        mAnnualWarrantyCharge = annualWarrantyCharge;
+        mDiscountPercentage = discountPercentage;
         mProductId = productId;
         mManufactureId = manufactureId;
         mWholeSalePrice = wholeSalePrice;
         mMarkup = markup;
     }
     public float SalePrice() {
-        return super.RetailPrice() + mAnnualWarrantyCharge * mWarrantyDuration;
+        return super.RetailPrice() - (super.RetailPrice() * mDiscountPercentage);
     }
-    @Override
+   @Override
     public String toString() {
-        return String.format("%s: %s\n%s: %s\n%s: %.2f\n%s: %.2f\n%s: %.2f\n%s: %s\n%s: %d\n%s: %.2f", 
+        return String.format("%s: %s\n%s: %s\n%s: %.2f\n%s: %.2f\n%s: %.2f\n%s: %s\n%s: %.2f", 
             "Product ID", mProductId, 
             "Manufacture ID", mManufactureId,
             "Wholesale Price", mWholeSalePrice,
             "Markup", mMarkup,
             "Total Price", SalePrice(),
             "Name", mName,
-            "Warranty Duration", mWarrantyDuration,
-            "Annual Warranty Charge", mAnnualWarrantyCharge);   
+            "Discount Percentage", mDiscountPercentage);
     }
-    @Override
+        @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
         }
-        if (obj instanceof Electronics) {
-            Electronics other = (Electronics) obj;
+        if (obj instanceof Apparel) {
+            Apparel other = (Apparel) obj;
             return this.mProductId == other.mProductId &&
                    this.mManufactureId == other.mManufactureId &&
                    this.mWholeSalePrice == other.mWholeSalePrice &&
                    this.mMarkup == other.mMarkup &&
                    this.mName.equals(other.mName) &&
-                   this.mWarrantyDuration == other.mWarrantyDuration &&
-                   this.mAnnualWarrantyCharge == other.mAnnualWarrantyCharge;
+                   this.mDiscountPercentage == other.mDiscountPercentage;
         }
         return false;
     }
